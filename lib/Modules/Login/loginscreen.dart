@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shop_app/Modules/Login/Cubit/bloc.dart';
 import 'package:shop_app/Modules/Login/Cubit/states.dart';
 import 'package:shop_app/Modules/Shop/Layout.dart';
@@ -31,8 +30,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 value: state.loginModel.data!.token,
               ).then((value)
               {
-                token = state.loginModel.data!.token!;
-
                 navigateAndFinish(
                   context,
                   ShopLayout(),

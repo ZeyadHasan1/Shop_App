@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/Modules/Login/loginscreen.dart';
 import 'package:shop_app/Modules/Onboarding/onboard.dart';
 import 'package:shop_app/Modules/Shop/Layout.dart';
-import 'package:shop_app/Shared/Components/components.dart';
 import 'package:shop_app/Shared/Dio/Dio.dart';
 import 'package:shop_app/Shared/cashhelper.dart';
 import 'package:shop_app/bloc_observer.dart';
@@ -22,7 +21,7 @@ Future<void> main() async {
   String token = CacheHelper.getData(key: 'token');
   print(token);
 
-  if (onBoarding) {
+  if (onBoarding == true) {
     if (token != '')
       widget = ShopLayout();
     else

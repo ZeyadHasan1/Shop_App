@@ -49,5 +49,3 @@ Color chooseToastColor(ToastStates state) {
 
   return color;
 }
-
-String token = '';
