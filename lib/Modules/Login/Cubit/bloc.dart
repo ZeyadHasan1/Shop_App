@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shop_app/Dio/Dio.dart';
-import 'package:shop_app/Login/Cubit/states.dart';
-import 'package:shop_app/Login/end_points.dart';
 import 'package:shop_app/Models/LoginModel.dart';
+import 'package:shop_app/Modules/Login/Cubit/states.dart';
+import 'package:shop_app/Modules/Login/end_points.dart';
+import 'package:shop_app/Shared/Dio/Dio.dart';
 
 class LoginCubit extends Cubit<LoginStates> {
   LoginCubit() : super(InitState());

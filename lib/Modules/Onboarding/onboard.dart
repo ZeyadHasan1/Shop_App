@@ -1,6 +1,8 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:shop_app/Login/loginscreen.dart';
+import 'package:shop_app/Modules/Login/loginscreen.dart';
+import 'package:shop_app/Shared/Components/components.dart';
+import 'package:shop_app/Shared/cashhelper.dart';
 
 class Onboardmodel {
   final String img;
@@ -24,6 +26,23 @@ class OnBoard extends StatefulWidget {
 }
 
 class _OnBoardState extends State<OnBoard> {
+
+    void submit() {
+    CacheHelper.saveData(
+      key: 'onBoarding',
+      value: true,
+    ).then((value)
+    {
+      if (value) {
+        navigateAndFinish(
+          context,
+          LoginScreen(),
+        );
+      }
+    });
+  }
+
+
   bool isLast = false;
   var onboardcontroller = PageController();
   List<Onboardmodel> onBoarding = [
@@ -53,12 +72,7 @@ class _OnBoardState extends State<OnBoard> {
         actions: [
           TextButton(
             onPressed: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (_) {
-                  return LoginScreen();
-                }),
-              );
+              submit();
             },
             child: Text(
               'Skip',
@@ -129,12 +143,7 @@ class _OnBoardState extends State<OnBoard> {
                 onPressed: () {
                   setState(() {
                     if (isLast) {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (_) {
-                          return LoginScreen();
-                        }),
-                      );
+                      submit();
                     } else {
                       onboardcontroller.nextPage(
                           duration: Duration(

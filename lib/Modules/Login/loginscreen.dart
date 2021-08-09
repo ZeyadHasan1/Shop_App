@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:shop_app/Login/Cubit/bloc.dart';
-import 'package:shop_app/Login/Cubit/states.dart';
+import 'package:shop_app/Modules/Login/Cubit/bloc.dart';
+import 'package:shop_app/Modules/Login/Cubit/states.dart';
+import 'package:shop_app/Modules/Shop/Layout.dart';
+import 'package:shop_app/Shared/Components/components.dart';
+import 'package:shop_app/Shared/cashhelper.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -23,25 +26,23 @@ class _LoginScreenState extends State<LoginScreen> {
         listener: (BuildContext context, state) {
           if (state is LoginSuccessState) {
             if (state.loginModel.status == true) {
-              Fluttertoast.showToast(
-                msg: '${state.loginModel.message}',
-                toastLength: Toast.LENGTH_LONG,
-                gravity: ToastGravity.BOTTOM,
-                timeInSecForIosWeb: 5,
-                backgroundColor: Colors.green,
-                textColor: Colors.white,
-                fontSize: 16.0,
-              );
+              CacheHelper.saveData(
+                key: 'token',
+                value: state.loginModel.data!.token,
+              ).then((value)
+              {
+                token = state.loginModel.data!.token!;
+
+                navigateAndFinish(
+                  context,
+                  ShopLayout(),
+                );
+              });
               print(state.loginModel.data!.token);
             } else {
-              Fluttertoast.showToast(
-                msg: '${state.loginModel.message}',
-                toastLength: Toast.LENGTH_LONG,
-                gravity: ToastGravity.BOTTOM,
-                timeInSecForIosWeb: 5,
-                backgroundColor: Colors.red,
-                textColor: Colors.white,
-                fontSize: 16.0,
+              showToast(
+                text: '${state.loginModel.message}',
+                state: ToastStates.ERROR,
               );
             }
           }
